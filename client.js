@@ -25,7 +25,8 @@ class NewClient {
                     this.logErorr(errlogin, err)
                     return
                 }
-                this.clientAuthentication()                
+                this.clientAuthentication()
+                console.log(this.Jwt,this.Username);
             })
         }
     }
@@ -58,8 +59,7 @@ class NewClient {
                 this.logErorr(errlogin, err)
                 return
             }
-            let data = await response.json();
-            
+            let data = await response.json();            
             this.Jwt = data;
         }).catch((err) => {
             err= "Not authorized. Please verify your username and password.";

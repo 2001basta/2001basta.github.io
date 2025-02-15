@@ -4,12 +4,19 @@
     padding: 0;
 }
 
-.home{
-    display: block;
+.fixehome{
+    position: fixed;
     background-image: url("./images/3334896.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover;
     background-position: center;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+.home{
+    background-color: none;
+    display: block;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
@@ -18,6 +25,7 @@
     height: 100vh;
     color: white;
 }
+
 
 
 .header {
@@ -75,17 +83,39 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .profile{
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
-.successfully-projet, .graph1-2, .graph3 {
+.successfully-projet, .graph3 {
     background-color: #18102e;
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.successfully-projet{
+    display: flex;
+    justify-content: space-between;
+}
 
+/**********************************Graph1-2...................*/
+.graph1-2{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    margin-top: 60px;
+}
+
+.graph1, .graph2 {
+    flex: 1;
+    background-color: #18102e;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.graph1{
+    margin-right: 20px;
+}
 /***********************************Profile ................*/
 
 .image {
@@ -131,9 +161,39 @@
     color: #555;
 }
 
+/*************************Level-xp amont audit................*/
+.level-rachio{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+/* .level {
+    background-color: #f9f9f9;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+} */
+
+.xpamont,.level,.auditrachio {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #a8a8aa;
+    border-radius: 5px;
+}
+
+/* .auditrachio {
+    background-color: #FF9800;
+    height: 30px;
+    border-radius: 5px;
+    width: 100%; 
+} */
 /************************Projects...............................*/
-.projects h2{
-    margin-bottom: 50px;
+
+.text{
+    margin-bottom: 20px;
 }
 .projects{
     display: flex;
