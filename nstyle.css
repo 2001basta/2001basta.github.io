@@ -25,7 +25,7 @@
     height: 100vh;
     color: white;
 }
-
+ 
 
 
 .header {
@@ -139,6 +139,7 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
+    border-left: 5px solid #a8a8aa;
 }
 
 .firstname {
@@ -167,29 +168,19 @@
     flex-direction: column;
     margin-bottom: 25px;
 }
-/* .level {
-    background-color: #f9f9f9;
-    height: 30px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;
-} */
+
 
 .xpamont,.level,.auditrachio {
     background-color: #f9f9f9;
-    padding: 15px;
+    padding: 10px;
     margin: 10px 0;
     border-left: 5px solid #a8a8aa;
     border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #18102e;
 }
 
-/* .auditrachio {
-    background-color: #FF9800;
-    height: 30px;
-    border-radius: 5px;
-    width: 100%; 
-} */
 /************************Projects...............................*/
 
 .text{
@@ -212,3 +203,5 @@
 .projet:hover {
     background-color: #179cda;
 }
+
+/*****************

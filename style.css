@@ -4,17 +4,20 @@
 }
 
 .home{
+    background-color: none;
     display: flex;
-    background-image: url("./images/3334896.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100vh;
     color: white;
 }
+/* .home{ the values chould be change
+    display: block;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    padding: 10px;
+} */
 
 .login {
     display: flex;
@@ -61,6 +64,196 @@ input[type="password"] {
 
 .button-login:hover {
     background-color: #0056b3; 
+}
+/*******************************************/
+
+.fixehome{
+    position: fixed;
+    background-image: url("./images/3334896.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+
+
+
+.header {
+    position: fixed;
+    padding: 10px 10px;
+    width: calc(100% - 20px);
+    top: 1px;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #18102e;
+    color: white;
+}
+
+.home-page {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    margin-right: 20px;
+}
+
+.logout {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #970f0b;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.logout:hover {
+    background-color: #c9302c;
+}
+
+.profile-project {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    margin-top: 60px;
+}
+
+.profile, .projects {
+    flex: 1;
+    background-color: #18102e;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.profile{
+    margin-right: 20px;
+}
+
+.successfully-projet, .graph3 {
+    background-color: #18102e;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.successfully-projet{
+    display: flex;
+    justify-content: space-between;
+}
+
+/**********************************Graph1-2...................*/
+.graph1-2{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    margin-top: 60px;
+}
+
+.graph1, .graph2 {
+    flex: 1;
+    background-color: #18102e;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.graph1{
+    margin-right: 20px;
+}
+/***********************************Profile ................*/
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+}
+.profilimage{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+}
+.firstname, .lastname, .email, .phone-number {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    border-left: 5px solid #a8a8aa;
+}
+
+.firstname {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #18102e;
+}
+
+.lastname {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #18102e;
+}
+
+.email {
+    color: #555;
+}
+
+.phone-number {
+    color: #555;
+}
+
+/*************************Level-xp amont audit................*/
+.level-rachio{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+
+.xpamont,.level,.auditrachio {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid #a8a8aa;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #18102e;
+}
+
+/************************Projects...............................*/
+
+.text{
+    margin-bottom: 20px;
+}
+.projects{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+.projet {
+    background-color: rgb(13, 8, 36);
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #a8a8aa;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.projet:hover {
+    background-color: #179cda;
 }
 
 @media (max-width: 600px) {
