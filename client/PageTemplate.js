@@ -6,10 +6,9 @@ export class PageTemplate {
     render() {
         return `
             <header class="header">
-                <div class="home-page">Home Page</div>
+                <div class="name">${this.userInfo.login}</div>
                 <div class="user">
-                    <div class="name">${this.userInfo.login}</div>
-                    <div class="logout">Logout</div>
+                    <div class="logout" id="logout">Logout</div>
                 </div>
             </header>
             <div class="profile-project">
@@ -70,12 +69,19 @@ export class PageTemplate {
     renderBarGraph() {
         return `
             <div class="graph1">
-                <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#f9f9f9" transform="scale(1,-1)">
-                    <line x1="0" y1="200" x2="0" y2="0" style="stroke:blue;stroke-width:2" />
-                    <line x1="0" y1="0" x2="200" y2="0" style="stroke:blue;stroke-width:2" />
-                    <rect width="20" height="80" y="20" x="50" fill="#f9f9f9" />
-                    <rect width="20" height="60" y="20" x="90" fill="#f9f9f9" />
-                    <rect width="20" height="100" y="20" x="140" fill="#f9f9f9" />
+                <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="#f9f9f9" transform="scale(1,-1)">
+                    <line x1="4" y1="250" x2="4" y2="100" style="stroke:blue;stroke-width:2" />
+                    <line x1="4" y1="100" x2="300" y2="100" style="stroke:blue;stroke-width:2" />
+                    <polygon points="0,250 8,250 4,260" style="fill:blue;" />
+                    <!--height=150*x ex: x=0.8 pr x=0.6 -->
+                    <rect width="20" height="120" y="100" x="40" fill="red" />
+                    <!-- y=100+height+20 x=x-2  porcentage=0.8*100-->
+                    <text y="240" x="38" style="fill:blue; font-size:15; font-weight:bold;">80%</text>
+                    <!-- x=40-4+20*i+40  -->
+                    <rect width="20" height="90" y="100" x="96" fill="red" />
+                    <text y="210" x="94" style="fill:blue; font-size:15; font-weight:bold;">60%</text>
+                    <rect width="20" height="100" y="100" x="156" fill="red" />
+                    <rect width="20" height="150" y="100" x="208" fill="red" />
                 </svg>
             </div>
         `;
@@ -95,5 +101,27 @@ export class PageTemplate {
                 </svg>
             </div>
         `;
+    }
+
+    renderLoginPage(){
+        return `
+            <div class="login">
+                <div class="login0">
+                    <p class="text-login">Login Page</p>
+                </div>
+                <div class="login1">
+                    <input id="username" type="text" value="" placeholder="Entre the username">
+                </div>
+                <div class="login2">
+                    <input id="password" type="password" value="" placeholder="Entre the password">
+                </div>
+                <div class="login3">
+                    <button id="button-login" class="button-login">Login</button>
+                </div>
+                <div class="login4">
+                    <p id="error" class="error"></p>
+                </div>
+            </div>
+        `
     }
 }

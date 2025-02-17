@@ -93,7 +93,7 @@ input[type="password"] {
     color: white;
 }
 
-.home-page {
+.name {
     font-size: 24px;
     font-weight: bold;
 }
@@ -101,10 +101,6 @@ input[type="password"] {
 .user {
     display: flex;
     align-items: center;
-}
-
-.name {
-    margin-right: 20px;
 }
 
 .logout {

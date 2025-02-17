@@ -1,4 +1,5 @@
 import { PageTemplate } from "./PageTemplate.js"
+import { AuthClient } from "./AuthClient.js";
 export class Profile {
     constructor(username, jwt) {
         this.username = username;
@@ -50,14 +51,32 @@ export class Profile {
         const template = new PageTemplate(this.personalInfo);
         home.innerHTML = template.render();
         this.applyStyles(home);
+        this.setupLogoutListener(home,template)
     }
 
-    applyStyles(element) {
-        Object.assign(element.style, {
-            display: 'block',
-            width: 'calc(100% - 20px)',
-            margin: '0 auto',
-            padding: '10px'
-        });
+    applyStyles(element,newstyle={
+        display: 'block',
+        width: 'calc(100% - 20px)',
+        margin: '0 auto',
+        padding: '10px'
+    }) {
+        Object.assign(element.style, newstyle);
+    }
+
+    setupLogoutListener(home,template){
+        let logout= document.getElementById("logout")
+        if (logout){
+            logout.addEventListener('click',()=>{
+                home.innerHTML = template.renderLoginPage();
+                this.applyStyles(home,{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0',
+                    padding: '0'
+                });
+                const client = new AuthClient();
+                client.setupLoginListener();
+            })
+        }
     }
 }
