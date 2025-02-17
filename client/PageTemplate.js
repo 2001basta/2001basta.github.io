@@ -19,19 +19,21 @@ export class PageTemplate {
                     <div class="firstname">${this.userInfo.firstName}</div>
                     <div class="lastname">${this.userInfo.lastName}</div>
                     <div class="email">${this.userInfo.email}</div>
+                    <div class="phone-number">${this.userInfo.attrs.tel}</div>
+                    <div class="city">${this.userInfo.attrs.city}</div>
                 </div>
                 <div class="projects">
                     <div class="level-rachio">
                         <h2 class="text">School Information</h2>
-                        <div class="level">Level 15</div>
-                        <div class="xpamont">xp 540MB</div>
-                        <div class="auditrachio">Audit Ratio: ${this.userInfo.auditRatio}</div>
+                        <div class="level">Level ${this.userInfo.Level}</div>
+                        <div class="xpamont">xp ${Math.ceil(this.userInfo.Myxp/1000)}MB</div>
+                        <div class="auditrachio">Audit Ratio: ${Math.ceil(this.userInfo.auditRatio)}</div>
                     </div>
                     <div class="all-projects">
                         <h2 class="text">The Projects</h2>
-                        <div class="projet">Project 1</div>
-                        <div class="projet">Project 2</div>
-                        <div class="projet">Project 3</div>
+                        <div class="projet">${this.userInfo.Porjects[0]}</div>
+                        <div class="projet">${this.userInfo.Porjects[1]}</div>
+                        <div class="projet">${this.userInfo.Porjects[2]}</div>
                     </div>
                 </div>
             </div>
@@ -60,8 +62,9 @@ export class PageTemplate {
                     stroke="#f9f9f9" 
                     stroke-width="5"
                     stroke-dasharray="282.74 282.74" 
-                    stroke-dashoffset="${282.74 * (1-x)}" />
-                    <text x="40" y="40" transform="rotate(30 35,35)">${100*x}%</text>
+                    stroke-dashoffset="${282.74 * (1-x)}" transform="rotate(-90 50,50)"/>
+
+                    <text x="40" y="40">${100*x}%</text>
             </svg>
         `).join('');
     }

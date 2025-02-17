@@ -1,17 +1,18 @@
 import { PageTemplate } from "./PageTemplate.js"
 import { AuthClient } from "./AuthClient.js";
+import {Query} from "./Queries.js"
 export class Profile {
     constructor(username, jwt) {
         this.username = username;
         this.jwt = jwt;
         this.personalInfo = null;
+        this.allquery = new Query()
     }
-
     async initialize() {
         if (!this.jwt) {
             throw new Error('Authentication token not found');
         }
-
+        
         try {
             const response = await fetch('https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql', {
                 method: 'POST',
@@ -19,15 +20,12 @@ export class Profile {
                     'Authorization': `Bearer ${this.jwt}`,
                 },
                 body: JSON.stringify({
-                    query: `{
-                        user {
-                            firstName
-                            lastName
-                            email
-                            auditRatio
-                            login
-                        }
-                    }`
+                    query: "{"
+                    +this.allquery.UserInfo
+                    +this.allquery.Myxp
+                    +this.allquery.Level
+                    +this.allquery.projects+
+                    "}"
                 })
             });
 
@@ -36,7 +34,15 @@ export class Profile {
             }
 
             const data = await response.json();
+            console.log(data);
+            
             this.personalInfo = data.data.user[0];
+            this.personalInfo.Level= data.data.level.aggregate.max.amount
+            this.personalInfo.Myxp= data.data.myxp.aggregate.sum.amount
+            this.personalInfo.Porjects= data.data.projects.map(proj =>
+                proj.path.replace("/oujda/module/","")
+            )
+            
         } catch (error) {
             throw new Error('Failed to load profile information');
         }

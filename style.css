@@ -181,7 +181,7 @@ input[type="password"] {
     object-fit: cover;
     object-position: center;
 }
-.firstname, .lastname, .email, .phone-number {
+.firstname, .lastname, .email, .phone-number ,.city{
     margin: 15px 0;
     padding: 10px;
     background-color: #f9f9f9;
@@ -202,13 +202,10 @@ input[type="password"] {
     color: #18102e;
 }
 
-.email {
+.email,.phone-number,.city {
     color: #555;
 }
 
-.phone-number {
-    color: #555;
-}
 
 /*************************Level-xp amont audit................*/
 .level-rachio{
