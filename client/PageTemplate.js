@@ -54,17 +54,18 @@ export class PageTemplate {
     }
 
     renderCircleGraph() {
-        let arr = [0.6,0.8,1]
-        return arr.map((x) => `
-            <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg">
-                <circle r="45" cx="50" cy="50" 
+        let arr = [this.userInfo.Go_porcentage,this.userInfo.Js_porcentage,this.userInfo.Checkpoint_porcentage]
+        let elments = ["piscine-go","piscine-js","last-checkpoint"]
+        return arr.map((x,i) => `
+            <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130">
+                <circle r="40" cx="50" cy="80" 
                     fill="#FF9800" 
                     stroke="#f9f9f9" 
                     stroke-width="5"
                     stroke-dasharray="282.74 282.74" 
-                    stroke-dashoffset="${282.74 * (1-x)}" transform="rotate(-90 50,50)"/>
-
-                    <text x="40" y="40">${100*x}%</text>
+                    stroke-dashoffset="${282.74 * (1-x)}" transform="rotate(-90 50,80)"/>
+                    <text x="35" y="80">${100*x}%</text>
+                    <text x="0" y="15" fill="#f9f9f9" font-size="20" font-weight="bold">${elments[i]}</text>
             </svg>
         `).join('');
     }

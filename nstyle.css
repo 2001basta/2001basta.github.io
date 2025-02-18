@@ -95,7 +95,7 @@
 }
 .successfully-projet{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /**********************************Graph1-2...................*/
