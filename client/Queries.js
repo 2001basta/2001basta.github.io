@@ -125,5 +125,55 @@ export class Query {
           count
         }
       }
+    `;
+    Skills = `
+      user {
+        skill_go: transactions_aggregate(where: { type: { _eq: "skill_go" } }) {
+          aggregate {
+            max {
+              amount
+            }
+          }
+        }
+        skill_sql: transactions_aggregate(where: { type: { _eq: "skill_sql" } }) {
+          aggregate {
+            max {
+              amount
+            }
+          }
+        }
+        skill_js: transactions_aggregate(where: { type: { _eq: "skill_js" } }) {
+          aggregate {
+            max {
+              amount
+            }
+          }
+        }
+        skill_html: transactions_aggregate(where: { type: { _eq: "skill_html" } }) {
+          aggregate {
+            max {
+              amount
+            }
+          }
+        }
+        skill_css: transactions_aggregate(where: { type: { _eq: "skill_css" } }) {
+          aggregate {
+            max {
+              amount
+            }
+          }
+        }
+      }
     `
-  }
+    Xp_progress = `
+    xp_progress: transaction(where: {
+        _and: [
+          { type: { _like: "xp" } },
+          { originEventId: { _eq: 41 } },
+        ]
+      }) {
+        createdAt
+        amount
+      }
+    `
+}

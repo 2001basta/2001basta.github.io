@@ -55,7 +55,7 @@ export class PageTemplate {
 
     renderCircleGraph() {
         let arr = [this.userInfo.Go_porcentage,this.userInfo.Js_porcentage,this.userInfo.Checkpoint_porcentage]
-        let elments = ["piscine-go","piscine-js","last-checkpoint"]
+        let elments = ["piscine-go","piscine-js","checkpoint"]
         return arr.map((x,i) => `
             <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130">
                 <circle r="40" cx="50" cy="80" 
@@ -71,32 +71,39 @@ export class PageTemplate {
     }
 
     renderBarGraph() {
+        let arrElement=[this.userInfo.Skill_go,this.userInfo.Skill_js,this.userInfo.Skill_html,this.userInfo.Skill_sql,this.userInfo.Skill_css]
+        let arrText=["Go","Js","Html","Sql","Css"]
+        let strElement=""
+        arrElement.forEach((x,i)=>{
+            strElement+=`<rect width="25" height="${180*(x/100)}" x="${40+40*i+24*i}" y="${230-180*(x/100)}" />
+            <text y="${230-180*(x/100)-15}" x="${40+40*i+24*i-5}" style="fill:#f9f9f9; font-size:15; font-weight:bold;">${x}%</text>
+             <text y="245" x="${40+40*i+24*i-5}" style="fill:#f9f9f9; font-size:5;" transform="rotate(45, ${40+40*i+24*i-5}, 245)">${arrText[i]}</text>
+            `
+        })
         return `
             <div class="graph1">
-                <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="#f9f9f9" transform="scale(1,-1)">
-                    <line x1="4" y1="250" x2="4" y2="100" style="stroke:blue;stroke-width:2" />
-                    <line x1="4" y1="100" x2="300" y2="100" style="stroke:blue;stroke-width:2" />
-                    <polygon points="0,250 8,250 4,260" style="fill:blue;" />
-                    <!--height=150*x ex: x=0.8 pr x=0.6 -->
-                    <rect width="20" height="120" y="100" x="40" fill="red" />
-                    <!-- y=100+height+20 x=x-2  porcentage=0.8*100-->
-                    <text y="240" x="38" style="fill:blue; font-size:15; font-weight:bold;">80%</text>
-                    <!-- x=40-4+20*i+40  -->
-                    <rect width="20" height="90" y="100" x="96" fill="red" />
-                    <text y="210" x="94" style="fill:blue; font-size:15; font-weight:bold;">60%</text>
-                    <rect width="20" height="100" y="100" x="156" fill="red" />
-                    <rect width="20" height="150" y="100" x="208" fill="red" />
+                <h2>Best skills</h2>
+                <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="#f9f9f9" >
+                    <line x1="4" y1="230" x2="350" y2="230" style="stroke:blue; stroke-width:2;"/>
+                    <line x1="4" y1="230" x2="4" y2="50" style="stroke:blue; stroke-width:2;"/>
+                    <polygon points="0,50 4,40 8,50" style="fill:blue;" />
+                    ${strElement}
                 </svg>
             </div>
         `;
     }
 
     renderLineGraph() {
+        let arrElement=[this.userInfo.Skill_go,this.userInfo.Skill_js,this.userInfo.Skill_html,this.userInfo.Skill_sql,this.userInfo.Skill_css]
+        
         return `
             <div class="graph2">
-                <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="gray" transform="scale(1,-1)">
-                    <line x1="0" y1="200" x2="0" y2="0" style="stroke:blue;stroke-width:2" />
-                    <line x1="0" y1="0" x2="200" y2="0" style="stroke:blue;stroke-width:2" />
+                <h2>XP progression</h2>
+                <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="#f9f9f9" >
+                    <line x1="4" y1="230" x2="350" y2="230" style="stroke:blue; stroke-width:2;"/>
+                    <line x1="4" y1="230" x2="4" y2="50" style="stroke:blue; stroke-width:2;"/>
+                    <polygon points="0,50 4,40 8,50" style="fill:blue;" />
+                    <polygon points="350,226 360,230 350,234" style="fill:blue;" />
                     <polyline style="fill:none; stroke: #f9f9f9; stroke-width:3" points="0,0 50,150 100,75 150,50 200,140 250,140" />
                     <circle r="3" cx="50" cy="150"></circle>
                     <circle r="3" cx="100" cy="75"></circle>

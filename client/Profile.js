@@ -27,7 +27,9 @@ export class Profile {
                         + this.allquery.Projects
                         + this.allquery.Go_porcentag
                         + this.allquery.Js_porcentage
-                        + this.allquery.Checkpoint+
+                        + this.allquery.Checkpoint
+                        + this.allquery.Skills
+                        + this.allquery.Xp_progress+
                         "}"
                 })
             });
@@ -49,9 +51,16 @@ export class Profile {
                 / data.data.go_exercise.aggregate.count).toFixed(2)
             this.personalInfo.Js_porcentage = (data.data.js_valid_exercise.aggregate.count
                 / data.data.js_exercise.aggregate.count).toFixed(2)
-            this.personalInfo.Checkpoint_porcentage=(data.data.valid_exercise.aggregate.count
-                /(data.data.passed_checkpoint.nodes[0].events.length*10)).toFixed(2)
-                
+            this.personalInfo.Checkpoint_porcentage = (data.data.valid_exercise.aggregate.count
+                / (data.data.passed_checkpoint.nodes[0].events.length * 10)).toFixed(2)
+            this.personalInfo.Skill_go = data.data.user[0].skill_go.aggregate.max.amount
+            this.personalInfo.Skill_js = data.data.user[0].skill_js.aggregate.max.amount
+            this.personalInfo.Skill_html = data.data.user[0].skill_html.aggregate.max.amount
+            this.personalInfo.Skill_css = data.data.user[0].skill_html.aggregate.max.amount
+            this.personalInfo.Skill_sql = data.data.user[0].skill_sql.aggregate.max.amount
+            this.personalInfo.Xp_progress= convertCreatedAtToDaysAndKb(data.data.xp_progress)
+            console.log(this.personalInfo.Xp_progress);
+            
         } catch (error) {
             throw new Error('Failed to load profile information');
         }
@@ -93,5 +102,19 @@ export class Profile {
                 client.setupLoginListener();
             })
         }
+    }
+    convertCreatedAtToDays(data) {
+        const now = new Date();
+        return data.map(item => {
+            const createdAtDate = new Date(item.createdAt);
+            const diffTime = Math.abs(now - createdAtDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            return {
+                createdAt: item.createdAt,
+                amount: (item.amount/1000).toFixed(2),
+                daysSince: diffDays
+            };
+        });
     }
 }
