@@ -204,4 +204,11 @@
     background-color: #179cda;
 }
 
-/*****************
+/*****************responsiviti*****************************/
+
+@media (max-width: 1000px){
+    .graph1-2{
+        display: block;
+        background-color: red;
+    }
+}

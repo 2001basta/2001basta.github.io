@@ -39,9 +39,9 @@ export class Profile {
             }
 
             const data = await response.json();
-            console.log(data);
 
             this.personalInfo = data.data.user[0];
+            this.personalInfo.auditRatio=this.personalInfo.auditRatio.toFixed(2)
             this.personalInfo.Level = data.data.level.aggregate.max.amount
             this.personalInfo.Myxp = data.data.myxp.aggregate.sum.amount
             this.personalInfo.Porjects = data.data.projects.map(proj =>
@@ -58,9 +58,7 @@ export class Profile {
             this.personalInfo.Skill_html = data.data.user[0].skill_html.aggregate.max.amount
             this.personalInfo.Skill_css = data.data.user[0].skill_html.aggregate.max.amount
             this.personalInfo.Skill_sql = data.data.user[0].skill_sql.aggregate.max.amount
-            this.personalInfo.Xp_progress= convertCreatedAtToDaysAndKb(data.data.xp_progress)
-            console.log(this.personalInfo.Xp_progress);
-            
+            this.personalInfo.Xp_progress= this.convertCreatedAtToDays(data.data.xp_progress)
         } catch (error) {
             throw new Error('Failed to load profile information');
         }
@@ -88,9 +86,13 @@ export class Profile {
     }
 
     setupLogoutListener(home, template) {
+        window.addEventListener('resize', () => {
+            console.log(document.body.clientWidth);
+        })
         let logout = document.getElementById("logout")
         if (logout) {
             logout.addEventListener('click', () => {
+                localStorage.removeItem("JWT");
                 home.innerHTML = template.renderLoginPage();
                 this.applyStyles(home, {
                     display: 'flex',
@@ -99,19 +101,25 @@ export class Profile {
                     padding: '0'
                 });
                 const client = new AuthClient();
+                this.jwt=""
                 client.setupLoginListener();
             })
         }
     }
     convertCreatedAtToDays(data) {
+        
         const now = new Date();
         return data.map(item => {
             const createdAtDate = new Date(item.createdAt);
             const diffTime = Math.abs(now - createdAtDate);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            let date = new Date(createdAtDate);
+            let month = String(date.getMonth() + 1).padStart(2, '0');
+            let day = String(date.getDate()).padStart(2, '0');
 
+            let monthDay = `${day}/${month}`;
             return {
-                createdAt: item.createdAt,
+                createdAt: monthDay,
                 amount: (item.amount/1000).toFixed(2),
                 daysSince: diffDays
             };

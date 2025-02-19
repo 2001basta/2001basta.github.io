@@ -254,3 +254,8 @@ input[type="password"] {
         width: 90%; 
     }
 }
+@media (max-width: 900px){
+    .graph1-2{
+        display: block;
+    }
+}

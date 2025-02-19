@@ -18,9 +18,16 @@ export class AuthClient {
         }
     }
 
-    setupLoginListener() {
+    async setupLoginListener() {
         const loginButton = document.getElementById('button-login')
         const errorElement = document.getElementById('error')
+        this.jwt=localStorage.getItem("JWT")
+        if (this.jwt) {
+            const profile = new Profile(this.credentials.username, this.jwt)
+            await profile.initialize()
+            profile.updatePage()
+            return
+        }
 
         if (loginButton) {
             loginButton.addEventListener('click', async () => {
@@ -32,10 +39,11 @@ export class AuthClient {
                     }
 
                     await this.authenticate()
+                    localStorage.setItem("JWT", this.jwt)
                     const profile = new Profile(this.credentials.username, this.jwt)
                     await profile.initialize()
                     profile.updatePage()
-                    
+
                 } catch (error) {
                     this.showError(errorElement, error.message)
                 }
@@ -76,6 +84,7 @@ export class AuthClient {
 
             const data = await response.json()
             this.jwt = data
+
         } catch (error) {
             throw new Error('Authentication failed. Please try again.')
         }

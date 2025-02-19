@@ -27,7 +27,7 @@ export class PageTemplate {
                         <h2 class="text">School Information</h2>
                         <div class="level">Level ${this.userInfo.Level}</div>
                         <div class="xpamont">xp ${Math.ceil(this.userInfo.Myxp/1000)}MB</div>
-                        <div class="auditrachio">Audit Ratio: ${Math.ceil(this.userInfo.auditRatio)}</div>
+                        <div class="auditrachio">Audit Ratio: ${this.userInfo.auditRatio}</div>
                     </div>
                     <div class="all-projects">
                         <h2 class="text">The Projects</h2>
@@ -77,7 +77,7 @@ export class PageTemplate {
         arrElement.forEach((x,i)=>{
             strElement+=`<rect width="25" height="${180*(x/100)}" x="${40+40*i+24*i}" y="${230-180*(x/100)}" />
             <text y="${230-180*(x/100)-15}" x="${40+40*i+24*i-5}" style="fill:#f9f9f9; font-size:15; font-weight:bold;">${x}%</text>
-             <text y="245" x="${40+40*i+24*i-5}" style="fill:#f9f9f9; font-size:5;" transform="rotate(45, ${40+40*i+24*i-5}, 245)">${arrText[i]}</text>
+             <text y="245" x="${40+40*i+24*i-5}" style="fill:#f9f9f9; font-size:15;" transform="rotate(45, ${40+40*i+24*i-5}, 245)">${arrText[i]}</text>
             `
         })
         return `
@@ -94,21 +94,47 @@ export class PageTemplate {
     }
 
     renderLineGraph() {
-        let arrElement=[this.userInfo.Skill_go,this.userInfo.Skill_js,this.userInfo.Skill_html,this.userInfo.Skill_sql,this.userInfo.Skill_css]
+        let arrElement=this.userInfo.Xp_progress
+        let points = ""
+        let circles =""
+        let style=""
+        let lastx=0
+        arrElement.forEach((obj,i)=>{
+            lastx+=parseInt(obj.amount)
+            points+=`${lastx},${obj.daysSince} `
+            circles+=`
+            <circle class="circle${i}" r="3" cx="${lastx}" cy="${obj.daysSince}" fill="blue"></circle>
+             <text x="${lastx-i}" y="${obj.daysSince+30}" style="fill:#f9f9f9; font-size:15;" class="text${i}">${obj.createdAt}
+             <tspan dy="1.2em" dx="-2.7em">${lastx}Xp</tspan>
+             </text>
+            `
+            style+=`
+                .text${i}{
+                    position: fixed;
+                    opacity: 0; 
+                    display: none;
+                    transition: opacity 0.3s;
+                }
+                .circle${i}:hover + .text${i}{
+                    opacity: 1;
+                    display: block;
+                }
+            `
+        })
         
         return `
             <div class="graph2">
-                <h2>XP progression</h2>
-                <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="#f9f9f9" >
-                    <line x1="4" y1="230" x2="350" y2="230" style="stroke:blue; stroke-width:2;"/>
-                    <line x1="4" y1="230" x2="4" y2="50" style="stroke:blue; stroke-width:2;"/>
-                    <polygon points="0,50 4,40 8,50" style="fill:blue;" />
-                    <polygon points="350,226 360,230 350,234" style="fill:blue;" />
-                    <polyline style="fill:none; stroke: #f9f9f9; stroke-width:3" points="0,0 50,150 100,75 150,50 200,140 250,140" />
-                    <circle r="3" cx="50" cy="150"></circle>
-                    <circle r="3" cx="100" cy="75"></circle>
-                    <circle r="3" cx="150" cy="50"></circle>
-                    <circle r="3" cx="250" cy="140"></circle>
+                <h2 style="margin-bottom: 14px;">XP progression</h2>
+                <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" fill="#f9f9f9" >
+                    <line x1="4" y1="296" x2="690" y2="296" style="stroke:blue; stroke-width:2;"/>
+                    <line x1="4" y1="296" x2="4" y2="10" style="stroke:blue; stroke-width:2;"/>
+                    <polygon points="0,10 4,0 8,10" style="fill:blue;" />
+                    <polygon points="690,292 700,296 690,300" style="fill:blue;" />
+                    <polyline style="fill:none; stroke: #f9f9f9; stroke-width:2" points="${points}" />
+                    ${circles}
+                    <style>
+                    ${style}
+                    </style>
                 </svg>
             </div>
         `;

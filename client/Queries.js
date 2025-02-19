@@ -45,14 +45,16 @@ export class Query {
         attrs
       }
     `;
-    javascript
+    
 
     Projects= `
-    projects:transaction(
-        limit: 3,
+      projects: transaction(
         order_by: { createdAt: desc },
         where: {
-          type: { _like: "xp" }
+          _and: [
+            { type: { _like: "xp" } },
+            { originEventId: { _eq: 41 } }
+          ]
         }
       ) {
         path
