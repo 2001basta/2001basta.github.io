@@ -88,11 +88,12 @@
 
 </html>
 <div>
-    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="#f9f9f9" transform="scale(1,-1)">
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="#f9f9f9"
+        transform="scale(1,-1)">
         <line x1="4" y1="250" x2="4" y2="100" style="stroke:blue;stroke-width:2" />
         <line x1="4" y1="100" x2="300" y2="100" style="stroke:blue;stroke-width:2" />
         <polygon points="0,250 8,250 4,260" style="fill:blue;" />
-        <!--height=180*x ex: x=0.8 pr x=0.6 y=230-180*x--> 
+        <!--height=180*x ex: x=0.8 pr x=0.6 y=230-180*x-->
         <rect width="20" height="120" y="100" x="40" fill="red" />
         <!-- y=100+height+20 x=x-2  porcentage=0.8*100-->
         <text y="240" x="38" style="fill:blue; font-size:15; font-weight:bold;">80%</text>
@@ -104,16 +105,61 @@
     </svg>
     <div class="graph2">
         <h2>XP progression</h2>
-        <svg width="200" width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="#f9f9f9">
-            <line x1="4" y1="230" x2="350" y2="230" style="stroke:blue; stroke-width:2;"/>
-            <line x1="4" y1="230" x2="4" y2="50" style="stroke:blue; stroke-width:2;"/>
+        <svg width="200" width="400" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"
+            fill="#f9f9f9">
+            <line x1="4" y1="230" x2="350" y2="230" style="stroke:blue; stroke-width:2;" />
+            <line x1="4" y1="230" x2="4" y2="50" style="stroke:blue; stroke-width:2;" />
             <polygon points="0,50 4,40 8,50" style="fill:blue;" />
             <polygon points="350,226 360,230 350,234" style="fill:blue;" />
-            <polyline style="fill:none; stroke: #f9f9f9; stroke-width:3" points="0,0 50,150 100,75 150,50 200,140 250,140" />
+            <polyline style="fill:none; stroke: #f9f9f9; stroke-width:3"
+                points="0,0 50,150 100,75 150,50 200,140 250,140" />
             <circle r="3" cx="50" cy="150"></circle>
             <circle r="3" cx="100" cy="75"></circle>
             <circle r="3" cx="150" cy="50"></circle>
             <circle r="3" cx="250" cy="140"></circle>
         </svg>
     </div>
+    <nav class="mobile-nav">
+        <div class="close-nav">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <ul class="nav-list">
+            <li><a onclick="refetch('/')"><i class="fa-solid fa-house"></i>Home</a></li>
+            {{ if .IsAuthenticated}}
+            <li><a onclick="refetch('/mycreatedposts')"><i class="fa-regular fa-star"></i></i>My Posts</a></li>
+            <li><a onclick="refetch('/mylikedposts')"><i class="fa-regular fa-heart"></i></i>Liked Posts</a></li>
+            {{end}}
+            <li>
+                <span class="categories-title"><i class="fa-solid fa-list"></i>Categories</span>
+                {{if .Categories}}
+                <ul class="categories-list">
+                    {{range .Categories}}
+                    <li><a onclick="refetch('/category/{{.ID}}','cat')">#{{.Label}} ({{.PostsCount}})</a></li>
+                    {{end}}
+                </ul>
+                {{else}}
+                <p class="no-categories">No categories available.</p>
+                {{end}}
+            </li>
+            <li><a><i class="fa-regular fa-star"></i></i>Chat</a></li>
+            <ul id="chat-mobile">
+
+            </ul>
+        </ul>
+    </nav>
 </div>
+<script>
+    const mobile_nav = document.querySelector(".mobile-nav")
+    const profile = document.querySelector(".profile-nav")
+    const close = document.querySelector(".close-nav")
+    mobile_nav.addEventListener('click', () => {
+        mobile_nav.style.top = "0"
+        profile.style.display = "flex"
+        close.style.display = "flex"
+    })
+    close.addEventListener('click', () => {
+        mobile_nav.style.top = ""
+        profile.style.display = "none"
+        close.style.display = "none"
+    })
+</script>

@@ -74,6 +74,7 @@ export class Profile {
         home.innerHTML = template.render();
         this.applyStyles(home);
         this.setupLogoutListener(home, template)
+        template.ShowAndHidProfil()
     }
 
     applyStyles(element, newstyle = {
