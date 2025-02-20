@@ -186,16 +186,16 @@ export class PageTemplate {
 
     ShowAndHidProfil() {
         const mobile_nav = document.querySelector(".mobile-nav")
+        const bar = document.querySelector(".bar")
         const profile = document.querySelector(".profile-nav")
         const close = document.querySelector(".close-nav")
-        mobile_nav.addEventListener('click', () => {
+        bar.addEventListener('click', () => {   
             mobile_nav.style.top = "0"
             profile.style.display = "block"
             close.style.display = "flex"
         })
-        close.addEventListener('click', () => {
-            
-            mobile_nav.style.top = "0"
+        close.addEventListener('click', () => {            
+            mobile_nav.style.top = ""
             profile.style.display = "none"
             close.style.display = "none"
         })
